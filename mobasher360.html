@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مباشر 360</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            background-color: #575757;
+        }
+
+        main {
+            margin: 20px;
+        }
+
+        .form-container {
+            margin: 20px auto;
+            max-width: 400px;
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-container input, .form-container button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 1rem;
+        }
+
+        .form-container button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background: #0056b3;
+        }
+
+        .article-container {
+            display: none;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>مباشر 360</h1>
+        <p>أخبار موثوقة على مدار الساعة</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">الرئيسية</a></li>
+            <li><a href="#" id="loginButton">تسجيل الدخول</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="form-container" id="loginForm">
+            <h2>تسجيل الدخول</h2>
+            <input type="text" id="username" placeholder="اسم المستخدم">
+            <input type="password" id="password" placeholder="كلمة المرور">
+            <button onclick="login()">تسجيل الدخول</button>
+        </div>
+
+        <div class="form-container article-container" id="articleForm">
+            <h2>إضافة مقال</h2>
+            <input type="text" id="articleTitle" placeholder="عنوان المقال">
+            <textarea id="articleContent" placeholder="محتوى المقال" rows="5"></textarea>
+            <button onclick="publishArticle()">نشر المقال</button>
+        </div>
+
+        <section id="articlesSection">
+            <h2>المقالات المنشورة</h2>
+            <div id="articlesContainer"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 مباشر 360. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        const admin = {
+            username: "admin",
+            password: "12345"
+        };
+
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (username === admin.username && password === admin.password) {
+                alert("تم تسجيل الدخول بنجاح!");
+                document.getElementById("loginForm").style.display = "none";
+                document.getElementById("articleForm").style.display = "block";
+            } else {
+                alert("اسم المستخدم أو كلمة المرور غير صحيحة.");
+            }
+        }
+
+        function publishArticle() {
+            const title = document.getElementById("articleTitle").value;
+            const content = document.getElementById("articleContent").value;
+
+            if (title && content) {
+                const articlesContainer = document.getElementById("articlesContainer");
+                const article = document.createElement("div");
+                article.innerHTML = <h3>${title}</h3><p>${content}</p>;
+                articlesContainer.appendChild(article);
+
+                document.getElementById("articleTitle").value = "";
+                document.getElementById("articleContent").value = "";
+
+                alert("تم نشر المقال بنجاح!");
+            } else {
+                alert("يرجى إدخال العنوان والمحتوى.");
+            }
+        }
+    </script>
+</body>
+</html>
